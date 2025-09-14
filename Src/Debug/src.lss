@@ -1,0 +1,899 @@
+
+src.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00803f00  00803f00  00000e73  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000003ce  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000a11  000083ce  000003ce  00000462  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .bss          0000002a  00803f00  00803f00  00000e73  2**0
+                  ALLOC
+  4 .comment      00000030  00000000  00000000  00000e73  2**0
+                  CONTENTS, READONLY
+  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000ea4  2**2
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000060  00000000  00000000  00000ee0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   0000235f  00000000  00000000  00000f40  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 0000136d  00000000  00000000  0000329f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000058f  00000000  00000000  0000460c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  000000fc  00000000  00000000  00004b9c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    0000130b  00000000  00000000  00004c98  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000398  00000000  00000000  00005fa3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000068  00000000  00000000  0000633b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
+   2:	28 c0       	rjmp	.+80     	; 0x54 <__bad_interrupt>
+   4:	27 c0       	rjmp	.+78     	; 0x54 <__bad_interrupt>
+   6:	26 c0       	rjmp	.+76     	; 0x54 <__bad_interrupt>
+   8:	25 c0       	rjmp	.+74     	; 0x54 <__bad_interrupt>
+   a:	24 c0       	rjmp	.+72     	; 0x54 <__bad_interrupt>
+   c:	23 c0       	rjmp	.+70     	; 0x54 <__bad_interrupt>
+   e:	22 c0       	rjmp	.+68     	; 0x54 <__bad_interrupt>
+  10:	21 c0       	rjmp	.+66     	; 0x54 <__bad_interrupt>
+  12:	20 c0       	rjmp	.+64     	; 0x54 <__bad_interrupt>
+  14:	1f c0       	rjmp	.+62     	; 0x54 <__bad_interrupt>
+  16:	1e c0       	rjmp	.+60     	; 0x54 <__bad_interrupt>
+  18:	1d c0       	rjmp	.+58     	; 0x54 <__bad_interrupt>
+  1a:	1d c0       	rjmp	.+58     	; 0x56 <__vector_13>
+  1c:	1b c0       	rjmp	.+54     	; 0x54 <__bad_interrupt>
+  1e:	1a c0       	rjmp	.+52     	; 0x54 <__bad_interrupt>
+  20:	19 c0       	rjmp	.+50     	; 0x54 <__bad_interrupt>
+  22:	18 c0       	rjmp	.+48     	; 0x54 <__bad_interrupt>
+  24:	17 c0       	rjmp	.+46     	; 0x54 <__bad_interrupt>
+  26:	16 c0       	rjmp	.+44     	; 0x54 <__bad_interrupt>
+  28:	15 c0       	rjmp	.+42     	; 0x54 <__bad_interrupt>
+  2a:	14 c0       	rjmp	.+40     	; 0x54 <__bad_interrupt>
+  2c:	13 c0       	rjmp	.+38     	; 0x54 <__bad_interrupt>
+  2e:	12 c0       	rjmp	.+36     	; 0x54 <__bad_interrupt>
+  30:	11 c0       	rjmp	.+34     	; 0x54 <__bad_interrupt>
+  32:	10 c0       	rjmp	.+32     	; 0x54 <__bad_interrupt>
+
+00000034 <__ctors_end>:
+  34:	11 24       	eor	r1, r1
+  36:	1f be       	out	0x3f, r1	; 63
+  38:	cf ef       	ldi	r28, 0xFF	; 255
+  3a:	cd bf       	out	0x3d, r28	; 61
+  3c:	df e3       	ldi	r29, 0x3F	; 63
+  3e:	de bf       	out	0x3e, r29	; 62
+
+00000040 <__do_clear_bss>:
+  40:	2f e3       	ldi	r18, 0x3F	; 63
+  42:	a0 e0       	ldi	r26, 0x00	; 0
+  44:	bf e3       	ldi	r27, 0x3F	; 63
+  46:	01 c0       	rjmp	.+2      	; 0x4a <.do_clear_bss_start>
+
+00000048 <.do_clear_bss_loop>:
+  48:	1d 92       	st	X+, r1
+
+0000004a <.do_clear_bss_start>:
+  4a:	aa 32       	cpi	r26, 0x2A	; 42
+  4c:	b2 07       	cpc	r27, r18
+  4e:	e1 f7       	brne	.-8      	; 0x48 <.do_clear_bss_loop>
+  50:	dc d0       	rcall	.+440    	; 0x20a <main>
+  52:	bb c1       	rjmp	.+886    	; 0x3ca <_exit>
+
+00000054 <__bad_interrupt>:
+  54:	d5 cf       	rjmp	.-86     	; 0x0 <__vectors>
+
+00000056 <__vector_13>:
+void initTeeth(void);
+uint8_t calEnvelope(const uint16_t pitch, uint16_t* envelope);
+
+
+// TCB T-sample ISR
+ISR(TCB0_INT_vect) {
+  56:	1f 92       	push	r1
+  58:	0f 92       	push	r0
+  5a:	0f b6       	in	r0, 0x3f	; 63
+  5c:	0f 92       	push	r0
+  5e:	11 24       	eor	r1, r1
+  60:	2f 93       	push	r18
+  62:	3f 93       	push	r19
+  64:	4f 93       	push	r20
+  66:	5f 93       	push	r21
+  68:	6f 93       	push	r22
+  6a:	7f 93       	push	r23
+  6c:	8f 93       	push	r24
+  6e:	9f 93       	push	r25
+  70:	af 93       	push	r26
+  72:	bf 93       	push	r27
+  74:	ef 93       	push	r30
+  76:	ff 93       	push	r31
+  #ifdef DEBUG_OUT
+    PORTA.OUTSET = PIN6_bm;
+  #endif
+// 少数点以下切り捨てて積算
+	int16_t per = 0;
+	for(uint8_t i = 0; i<MAX_NOTE; i++) {
+  78:	30 e0       	ldi	r19, 0x00	; 0
+ISR(TCB0_INT_vect) {
+  #ifdef DEBUG_OUT
+    PORTA.OUTSET = PIN6_bm;
+  #endif
+// 少数点以下切り捨てて積算
+	int16_t per = 0;
+  7a:	40 e0       	ldi	r20, 0x00	; 0
+  7c:	50 e0       	ldi	r21, 0x00	; 0
+	for(uint8_t i = 0; i<MAX_NOTE; i++) {
+  7e:	26 c0       	rjmp	.+76     	; 0xcc <__EEPROM_REGION_LENGTH__+0x4c>
+		// WaveTableを読み出しエンベロープ処理
+		per += ((int16_t)Wave[teeth[i].waveIdx >> 8] * (int16_t)(teeth[i].EnvDat)) >> 8;
+  80:	e3 2f       	mov	r30, r19
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+  84:	cf 01       	movw	r24, r30
+  86:	88 0f       	add	r24, r24
+  88:	99 1f       	adc	r25, r25
+  8a:	88 0f       	add	r24, r24
+  8c:	99 1f       	adc	r25, r25
+  8e:	e8 0f       	add	r30, r24
+  90:	f9 1f       	adc	r31, r25
+  92:	ee 5f       	subi	r30, 0xFE	; 254
+  94:	f0 4c       	sbci	r31, 0xC0	; 192
+  96:	a2 81       	ldd	r26, Z+2	; 0x02
+  98:	b3 81       	ldd	r27, Z+3	; 0x03
+  9a:	ab 2f       	mov	r26, r27
+  9c:	bb 27       	eor	r27, r27
+  9e:	a1 5a       	subi	r26, 0xA1	; 161
+  a0:	b6 47       	sbci	r27, 0x76	; 118
+  a2:	2c 91       	ld	r18, X
+  a4:	64 81       	ldd	r22, Z+4	; 0x04
+  a6:	26 03       	mulsu	r18, r22
+  a8:	c0 01       	movw	r24, r0
+  aa:	11 24       	eor	r1, r1
+  ac:	89 2f       	mov	r24, r25
+  ae:	99 0f       	add	r25, r25
+  b0:	99 0b       	sbc	r25, r25
+  b2:	48 0f       	add	r20, r24
+  b4:	59 1f       	adc	r21, r25
+		// WaveTableインデックス更新
+		teeth[i].waveIdx += teeth[i].Pitch;
+  b6:	60 81       	ld	r22, Z
+  b8:	71 81       	ldd	r23, Z+1	; 0x01
+  ba:	82 81       	ldd	r24, Z+2	; 0x02
+  bc:	93 81       	ldd	r25, Z+3	; 0x03
+  be:	86 0f       	add	r24, r22
+  c0:	97 1f       	adc	r25, r23
+  c2:	82 83       	std	Z+2, r24	; 0x02
+  c4:	93 83       	std	Z+3, r25	; 0x03
+		if(teeth[i].waveIdx>262143) {
+  c6:	82 81       	ldd	r24, Z+2	; 0x02
+  c8:	93 81       	ldd	r25, Z+3	; 0x03
+  #ifdef DEBUG_OUT
+    PORTA.OUTSET = PIN6_bm;
+  #endif
+// 少数点以下切り捨てて積算
+	int16_t per = 0;
+	for(uint8_t i = 0; i<MAX_NOTE; i++) {
+  ca:	3f 5f       	subi	r19, 0xFF	; 255
+  cc:	38 30       	cpi	r19, 0x08	; 8
+  ce:	c0 f2       	brcs	.-80     	; 0x80 <__EEPROM_REGION_LENGTH__>
+		if(teeth[i].waveIdx>262143) {
+			teeth[i].waveIdx -= 32768;
+		}
+	}
+	// リミット処理後にPWM PERBUFへ書き込み
+	if(per>127) {
+  d0:	40 38       	cpi	r20, 0x80	; 128
+  d2:	51 05       	cpc	r21, r1
+  d4:	2c f4       	brge	.+10     	; 0xe0 <__EEPROM_REGION_LENGTH__+0x60>
+		per = 127;
+		} else if(per<-127) {
+  d6:	41 38       	cpi	r20, 0x81	; 129
+  d8:	8f ef       	ldi	r24, 0xFF	; 255
+  da:	58 07       	cpc	r21, r24
+  dc:	24 f0       	brlt	.+8      	; 0xe6 <__EEPROM_REGION_LENGTH__+0x66>
+  de:	05 c0       	rjmp	.+10     	; 0xea <__EEPROM_REGION_LENGTH__+0x6a>
+			teeth[i].waveIdx -= 32768;
+		}
+	}
+	// リミット処理後にPWM PERBUFへ書き込み
+	if(per>127) {
+		per = 127;
+  e0:	4f e7       	ldi	r20, 0x7F	; 127
+  e2:	50 e0       	ldi	r21, 0x00	; 0
+  e4:	02 c0       	rjmp	.+4      	; 0xea <__EEPROM_REGION_LENGTH__+0x6a>
+		} else if(per<-127) {
+		per = -127;
+  e6:	41 e8       	ldi	r20, 0x81	; 129
+  e8:	5f ef       	ldi	r21, 0xFF	; 255
+	}
+	TCA0.SINGLE.CMP0BUF = per + 128;
+  ea:	40 58       	subi	r20, 0x80	; 128
+  ec:	5f 4f       	sbci	r21, 0xFF	; 255
+  ee:	40 93 38 0a 	sts	0x0A38, r20	; 0x800a38 <Note+0x7f7cd9>
+  f2:	50 93 39 0a 	sts	0x0A39, r21	; 0x800a39 <Note+0x7f7cda>
+
+	// 5ミリ秒カウンタ更新(実際は4.99ms)
+	primeCntr++;
+  f6:	80 91 01 3f 	lds	r24, 0x3F01	; 0x803f01 <primeCntr>
+  fa:	8f 5f       	subi	r24, 0xFF	; 255
+  fc:	80 93 01 3f 	sts	0x3F01, r24	; 0x803f01 <primeCntr>
+	if(primeCntr>=130) {
+ 100:	80 91 01 3f 	lds	r24, 0x3F01	; 0x803f01 <primeCntr>
+ 104:	82 38       	cpi	r24, 0x82	; 130
+ 106:	28 f0       	brcs	.+10     	; 0x112 <__DATA_REGION_LENGTH__+0x12>
+		ms5Flag = 1;
+ 108:	81 e0       	ldi	r24, 0x01	; 1
+ 10a:	80 93 00 3f 	sts	0x3F00, r24	; 0x803f00 <__DATA_REGION_ORIGIN__>
+		primeCntr = 0;
+ 10e:	10 92 01 3f 	sts	0x3F01, r1	; 0x803f01 <primeCntr>
+	}
+
+	// 割り込みフラグをクリア
+	TCB0.INTFLAGS = TCB_CAPT_bm;
+ 112:	81 e0       	ldi	r24, 0x01	; 1
+ 114:	80 93 46 0a 	sts	0x0A46, r24	; 0x800a46 <Note+0x7f7ce7>
+
+  #ifdef DEBUG_OUT
+    PORTA.OUTCLR = PIN6_bm;
+  #endif
+
+}
+ 118:	ff 91       	pop	r31
+ 11a:	ef 91       	pop	r30
+ 11c:	bf 91       	pop	r27
+ 11e:	af 91       	pop	r26
+ 120:	9f 91       	pop	r25
+ 122:	8f 91       	pop	r24
+ 124:	7f 91       	pop	r23
+ 126:	6f 91       	pop	r22
+ 128:	5f 91       	pop	r21
+ 12a:	4f 91       	pop	r20
+ 12c:	3f 91       	pop	r19
+ 12e:	2f 91       	pop	r18
+ 130:	0f 90       	pop	r0
+ 132:	0f be       	out	0x3f, r0	; 63
+ 134:	0f 90       	pop	r0
+ 136:	1f 90       	pop	r1
+ 138:	18 95       	reti
+
+0000013a <setCLK_PER_20M>:
+void setCLK_PER_20M(void)
+{
+	// A selector for CLK_MAIN
+	//	_PROTECTED_WRITE(CLKCTRL.MCLKCTRLA, 1);	// 20MHz OSC select (default)
+	// A PreScaler for CLK_CPU & CLK_PER
+	_PROTECTED_WRITE(CLKCTRL.MCLKCTRLB, 0);	// skip PreScaler
+ 13a:	90 e0       	ldi	r25, 0x00	; 0
+ 13c:	88 ed       	ldi	r24, 0xD8	; 216
+ 13e:	84 bf       	out	0x34, r24	; 52
+ 140:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <Note+0x7f7302>
+ 144:	08 95       	ret
+
+00000146 <setPWM_PINS>:
+// WO0 : PKG 7pin PA3	CMP0
+// CCL : PKG 3pin PA7	LUT1
+void setPWM_PINS(void)
+{
+	// WO0(PA3),CCL1(PA7)を出力に設定
+	PORTA.DIRSET = PIN3_bm | PIN7_bm;
+ 146:	88 e8       	ldi	r24, 0x88	; 136
+ 148:	80 93 01 04 	sts	0x0401, r24	; 0x800401 <Note+0x7f76a2>
+ 14c:	08 95       	ret
+
+0000014e <setTCA_SSPWM>:
+// CMP0 & CMP1 enable
+// single-slope PWM
+void setTCA_SSPWM(void)
+{
+	// TCA0設定：Single-slope PWM, CMP0出力有効, Auto Lock Up Enable
+	TCA0.SINGLE.CTRLB = TCA_SINGLE_CMP0EN_bm | TCA_SINGLE_WGMODE_SINGLESLOPE_gc;
+ 14e:	e0 e0       	ldi	r30, 0x00	; 0
+ 150:	fa e0       	ldi	r31, 0x0A	; 10
+ 152:	83 e1       	ldi	r24, 0x13	; 19
+ 154:	81 83       	std	Z+1, r24	; 0x01
+	// PWM周期設定
+	TCA0.SINGLE.PER = TCA_PER - 1;
+ 156:	8f ef       	ldi	r24, 0xFF	; 255
+ 158:	90 e0       	ldi	r25, 0x00	; 0
+ 15a:	86 a3       	std	Z+38, r24	; 0x26
+ 15c:	97 a3       	std	Z+39, r25	; 0x27
+	// デューティ比設定（50%）
+	TCA0.SINGLE.CMP0 = 128;
+ 15e:	80 e8       	ldi	r24, 0x80	; 128
+ 160:	90 e0       	ldi	r25, 0x00	; 0
+ 162:	80 a7       	std	Z+40, r24	; 0x28
+ 164:	91 a7       	std	Z+41, r25	; 0x29
+	// クロック選択：DIV1（分周なし）で20MHz動作
+	TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV1_gc | TCA_SINGLE_ENABLE_bm;
+ 166:	81 e0       	ldi	r24, 0x01	; 1
+ 168:	80 83       	st	Z, r24
+ 16a:	08 95       	ret
+
+0000016c <setCCL_LUT1>:
+
+// CCL1でTCA.CMP0の反転信号を出力する
+void setCCL_LUT1(void)
+{
+	// LUT入力選択
+	CCL.LUT1CTRLB = CCL_INSEL1_MASK_gc | CCL_INSEL0_TCA0_gc;		// TCA0.WO0を入力に使用
+ 16c:	e0 ec       	ldi	r30, 0xC0	; 192
+ 16e:	f1 e0       	ldi	r31, 0x01	; 1
+ 170:	88 e0       	ldi	r24, 0x08	; 8
+ 172:	82 87       	std	Z+10, r24	; 0x0a
+	CCL.LUT1CTRLC = CCL_INSEL2_MASK_gc;
+ 174:	13 86       	std	Z+11, r1	; 0x0b
+	// LUT1 Truth Table
+	CCL.TRUTH1 = 0x55;		// INSEL0の反転
+ 176:	85 e5       	ldi	r24, 0x55	; 85
+ 178:	84 87       	std	Z+12, r24	; 0x0c
+	// 出力設定
+	CCL.LUT1CTRLA = CCL_OUTEN_bm | CCL_ENABLE_bm;	// ENABLE
+ 17a:	89 e0       	ldi	r24, 0x09	; 9
+ 17c:	81 87       	std	Z+9, r24	; 0x09
+	CCL.CTRLA = CCL_ENABLE_bm;				// Enable
+ 17e:	81 e0       	ldi	r24, 0x01	; 1
+ 180:	80 83       	st	Z, r24
+ 182:	08 95       	ret
+
+00000184 <setTCB_PeriodicInterrupt>:
+// TCB 周期的割り込み 設定
+// fSMP = 26.0416666666667kHz, fSMP = fPER/3
+void setTCB_PeriodicInterrupt(void)
+{
+	// TCBを一時停止
+	TCB0.CTRLA = 0;
+ 184:	e0 e4       	ldi	r30, 0x40	; 64
+ 186:	fa e0       	ldi	r31, 0x0A	; 10
+ 188:	10 82       	st	Z, r1
+	// 周期モードに設定(default)
+	TCB0.CTRLB = TCB_CNTMODE_INT_gc;
+ 18a:	11 82       	std	Z+1, r1	; 0x01
+	// 割り込み周期を設定 : TCA PWM周期の整数倍で設定
+	TCB0.CCMP = TCB_PER;
+ 18c:	8f ef       	ldi	r24, 0xFF	; 255
+ 18e:	92 e0       	ldi	r25, 0x02	; 2
+ 190:	84 87       	std	Z+12, r24	; 0x0c
+ 192:	95 87       	std	Z+13, r25	; 0x0d
+	// 割り込みを許可
+	TCB0.INTCTRL = TCB_CAPT_bm;
+ 194:	81 e0       	ldi	r24, 0x01	; 1
+ 196:	85 83       	std	Z+5, r24	; 0x05
+	// TCBを有効化 クロックは CLK_PERを選択
+	TCB0.CTRLA = TCB_ENABLE_bm;
+ 198:	80 83       	st	Z, r24
+ 19a:	08 95       	ret
+
+0000019c <initTeeth>:
+
+
+// teeth 構造体初期化
+void initTeeth(void)
+{
+	for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 19c:	80 e0       	ldi	r24, 0x00	; 0
+ 19e:	11 c0       	rjmp	.+34     	; 0x1c2 <initTeeth+0x26>
+		teeth[i].Pitch = 0;
+ 1a0:	e8 2f       	mov	r30, r24
+ 1a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a4:	9f 01       	movw	r18, r30
+ 1a6:	22 0f       	add	r18, r18
+ 1a8:	33 1f       	adc	r19, r19
+ 1aa:	22 0f       	add	r18, r18
+ 1ac:	33 1f       	adc	r19, r19
+ 1ae:	e2 0f       	add	r30, r18
+ 1b0:	f3 1f       	adc	r31, r19
+ 1b2:	ee 5f       	subi	r30, 0xFE	; 254
+ 1b4:	f0 4c       	sbci	r31, 0xC0	; 192
+ 1b6:	10 82       	st	Z, r1
+ 1b8:	11 82       	std	Z+1, r1	; 0x01
+		teeth[i].waveIdx = 0;
+ 1ba:	12 82       	std	Z+2, r1	; 0x02
+ 1bc:	13 82       	std	Z+3, r1	; 0x03
+		//		teeth[i].EvlIdx = 255;
+		teeth[i].EnvDat = 0;
+ 1be:	14 82       	std	Z+4, r1	; 0x04
+
+
+// teeth 構造体初期化
+void initTeeth(void)
+{
+	for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 1c0:	8f 5f       	subi	r24, 0xFF	; 255
+ 1c2:	88 30       	cpi	r24, 0x08	; 8
+ 1c4:	68 f3       	brcs	.-38     	; 0x1a0 <initTeeth+0x4>
+		teeth[i].Pitch = 0;
+		teeth[i].waveIdx = 0;
+		//		teeth[i].EvlIdx = 255;
+		teeth[i].EnvDat = 0;
+	}
+}
+ 1c6:	08 95       	ret
+
+000001c8 <calEnvelope>:
+
+
+uint8_t calEnvelope(const uint16_t pitch, uint16_t* envelope)
+{
+ 1c8:	fb 01       	movw	r30, r22
+	uint16_t delta = (((pitch - 138) >> 4) + 103) >> 1;	// 小数点以下7ビット
+ 1ca:	8a 58       	subi	r24, 0x8A	; 138
+ 1cc:	91 09       	sbc	r25, r1
+ 1ce:	92 95       	swap	r25
+ 1d0:	82 95       	swap	r24
+ 1d2:	8f 70       	andi	r24, 0x0F	; 15
+ 1d4:	89 27       	eor	r24, r25
+ 1d6:	9f 70       	andi	r25, 0x0F	; 15
+ 1d8:	89 27       	eor	r24, r25
+ 1da:	89 59       	subi	r24, 0x99	; 153
+ 1dc:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1de:	96 95       	lsr	r25
+ 1e0:	87 95       	ror	r24
+	*envelope = *envelope + delta;
+ 1e2:	20 81       	ld	r18, Z
+ 1e4:	31 81       	ldd	r19, Z+1	; 0x01
+ 1e6:	82 0f       	add	r24, r18
+ 1e8:	93 1f       	adc	r25, r19
+ 1ea:	80 83       	st	Z, r24
+ 1ec:	91 83       	std	Z+1, r25	; 0x01
+	if(*envelope>=32768) {
+ 1ee:	99 23       	and	r25, r25
+ 1f0:	34 f4       	brge	.+12     	; 0x1fe <calEnvelope+0x36>
+		*envelope = 32768;
+ 1f2:	80 e0       	ldi	r24, 0x00	; 0
+ 1f4:	90 e8       	ldi	r25, 0x80	; 128
+ 1f6:	80 83       	st	Z, r24
+ 1f8:	91 83       	std	Z+1, r25	; 0x01
+		return 255;
+ 1fa:	8f ef       	ldi	r24, 0xFF	; 255
+ 1fc:	08 95       	ret
+		} else {
+		return *envelope >> 7;
+ 1fe:	88 0f       	add	r24, r24
+ 200:	89 2f       	mov	r24, r25
+ 202:	88 1f       	adc	r24, r24
+ 204:	99 0b       	sbc	r25, r25
+ 206:	91 95       	neg	r25
+	}
+}
+ 208:	08 95       	ret
+
+0000020a <main>:
+
+}
+
+
+int main(void)
+{
+ 20a:	cf 93       	push	r28
+ 20c:	df 93       	push	r29
+ 20e:	cd b7       	in	r28, 0x3d	; 61
+ 210:	de b7       	in	r29, 0x3e	; 62
+ 212:	68 97       	sbiw	r28, 0x18	; 24
+ 214:	cd bf       	out	0x3d, r28	; 61
+ 216:	de bf       	out	0x3e, r29	; 62
+	// Main Clock
+	setCLK_PER_20M();
+ 218:	90 df       	rcall	.-224    	; 0x13a <setCLK_PER_20M>
+	uint8_t NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+	uint8_t NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+	uint8_t DesignatedNote[MAX_NOTE];
+	uint16_t tickCntr = 0;			// 発音タイミングカウンタ
+	uint16_t NoteNumber = 0;		// ノート番号
+	uint16_t envelope[MAX_NOTE] = {0};
+ 21a:	fe 01       	movw	r30, r28
+ 21c:	39 96       	adiw	r30, 0x09	; 9
+ 21e:	80 e1       	ldi	r24, 0x10	; 16
+ 220:	df 01       	movw	r26, r30
+ 222:	1d 92       	st	X+, r1
+ 224:	8a 95       	dec	r24
+ 226:	e9 f7       	brne	.-6      	; 0x222 <main+0x18>
+
+	initTeeth();	// teeth 構造体初期化
+ 228:	b9 df       	rcall	.-142    	; 0x19c <initTeeth>
+	uint16_t maxNoteNumber = sizeof(score_note)/sizeof(score_note[0]);
+	uint16_t estimatedEndTicks = score_tick[maxNoteNumber - 1] + 600;	// 約3秒
+	uint8_t estimatedEndFlag = 0;
+
+	// TCA PWM setting
+	setPWM_PINS();
+ 22a:	8d df       	rcall	.-230    	; 0x146 <setPWM_PINS>
+	setTCA_SSPWM();
+ 22c:	90 df       	rcall	.-224    	; 0x14e <setTCA_SSPWM>
+	setCCL_LUT1();
+ 22e:	9e df       	rcall	.-196    	; 0x16c <setCCL_LUT1>
+	// Timer
+	setTCB_PeriodicInterrupt();
+ 230:	a9 df       	rcall	.-174    	; 0x184 <setTCB_PeriodicInterrupt>
+	// 割り込み許可
+	sei();
+ 232:	78 94       	sei
+
+	initTeeth();	// teeth 構造体初期化
+	// 終了マーカーが無い場合の暫定終了ポイント
+	uint16_t maxNoteNumber = sizeof(score_note)/sizeof(score_note[0]);
+	uint16_t estimatedEndTicks = score_tick[maxNoteNumber - 1] + 600;	// 約3秒
+	uint8_t estimatedEndFlag = 0;
+ 234:	b1 2c       	mov	r11, r1
+	// 楽譜演奏用変数
+	uint8_t NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+	uint8_t NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+	uint8_t DesignatedNote[MAX_NOTE];
+	uint16_t tickCntr = 0;			// 発音タイミングカウンタ
+	uint16_t NoteNumber = 0;		// ノート番号
+ 236:	e1 2c       	mov	r14, r1
+ 238:	f1 2c       	mov	r15, r1
+
+	// 楽譜演奏用変数
+	uint8_t NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+	uint8_t NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+	uint8_t DesignatedNote[MAX_NOTE];
+	uint16_t tickCntr = 0;			// 発音タイミングカウンタ
+ 23a:	c1 2c       	mov	r12, r1
+ 23c:	d1 2c       	mov	r13, r1
+    PORTA.DIRSET |= PIN6_bm;
+  #endif
+
+	// 楽譜演奏用変数
+	uint8_t NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+	uint8_t NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+ 23e:	00 e0       	ldi	r16, 0x00	; 0
+  #ifdef DEBUG_OUT
+    PORTA.DIRSET |= PIN6_bm;
+  #endif
+
+	// 楽譜演奏用変数
+	uint8_t NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+ 240:	10 e0       	ldi	r17, 0x00	; 0
+	sei();
+
+    /* Replace with your application code */
+    while (1) 
+    {
+		if(ms5Flag) {
+ 242:	80 91 00 3f 	lds	r24, 0x3F00	; 0x803f00 <__DATA_REGION_ORIGIN__>
+ 246:	88 23       	and	r24, r24
+ 248:	e1 f3       	breq	.-8      	; 0x242 <main+0x38>
+			#ifdef DEBUG_OUT
+			PORTA.OUTSET = PIN6_bm;
+			#endif
+		
+			ms5Flag = 0;
+ 24a:	10 92 00 3f 	sts	0x3F00, r1	; 0x803f00 <__DATA_REGION_ORIGIN__>
+			
+			// NoteOn情報を調べて発音を開始
+			for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 24e:	20 e0       	ldi	r18, 0x00	; 0
+ 250:	27 c0       	rjmp	.+78     	; 0x2a0 <main+0x96>
+				if(NoteOn & NoteOn_bm[i]) {
+ 252:	82 2f       	mov	r24, r18
+ 254:	90 e0       	ldi	r25, 0x00	; 0
+ 256:	fc 01       	movw	r30, r24
+ 258:	e2 53       	subi	r30, 0x32	; 50
+ 25a:	fc 47       	sbci	r31, 0x7C	; 124
+ 25c:	30 81       	ld	r19, Z
+ 25e:	30 23       	and	r19, r16
+ 260:	f1 f0       	breq	.+60     	; 0x29e <main+0x94>
+					teeth[i].Pitch = Note[DesignatedNote[i]];
+ 262:	e1 e0       	ldi	r30, 0x01	; 1
+ 264:	f0 e0       	ldi	r31, 0x00	; 0
+ 266:	ec 0f       	add	r30, r28
+ 268:	fd 1f       	adc	r31, r29
+ 26a:	e8 0f       	add	r30, r24
+ 26c:	f9 1f       	adc	r31, r25
+ 26e:	e0 81       	ld	r30, Z
+ 270:	f0 e0       	ldi	r31, 0x00	; 0
+ 272:	ee 0f       	add	r30, r30
+ 274:	ff 1f       	adc	r31, r31
+ 276:	e1 5a       	subi	r30, 0xA1	; 161
+ 278:	f2 47       	sbci	r31, 0x72	; 114
+ 27a:	40 81       	ld	r20, Z
+ 27c:	51 81       	ldd	r21, Z+1	; 0x01
+ 27e:	fc 01       	movw	r30, r24
+ 280:	ee 0f       	add	r30, r30
+ 282:	ff 1f       	adc	r31, r31
+ 284:	ee 0f       	add	r30, r30
+ 286:	ff 1f       	adc	r31, r31
+ 288:	8e 0f       	add	r24, r30
+ 28a:	9f 1f       	adc	r25, r31
+ 28c:	fc 01       	movw	r30, r24
+ 28e:	ee 5f       	subi	r30, 0xFE	; 254
+ 290:	f0 4c       	sbci	r31, 0xC0	; 192
+ 292:	40 83       	st	Z, r20
+ 294:	51 83       	std	Z+1, r21	; 0x01
+					teeth[i].waveIdx = 0;
+ 296:	12 82       	std	Z+2, r1	; 0x02
+ 298:	13 82       	std	Z+3, r1	; 0x03
+					teeth[i].EnvDat = 255;		// Envelope[0] = 255
+ 29a:	8f ef       	ldi	r24, 0xFF	; 255
+ 29c:	84 83       	std	Z+4, r24	; 0x04
+			#endif
+		
+			ms5Flag = 0;
+			
+			// NoteOn情報を調べて発音を開始
+			for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 29e:	2f 5f       	subi	r18, 0xFF	; 255
+ 2a0:	28 30       	cpi	r18, 0x08	; 8
+ 2a2:	b8 f2       	brcs	.-82     	; 0x252 <main+0x48>
+ 2a4:	00 e0       	ldi	r16, 0x00	; 0
+ 2a6:	36 c0       	rjmp	.+108    	; 0x314 <main+0x10a>
+			// 楽譜のtickとnoteをチェックして発音情報を登録
+			// 発音数がMAX_NOTEを超えた場合でも発音状態を無視して順番に再発音する
+			NoteOn = 0;
+			while(score_tick[NoteNumber]<=tickCntr) {
+				// 発音情報の登録
+				NoteOn |= 0x01 << NoteQueue;
+ 2a8:	81 2f       	mov	r24, r17
+ 2aa:	90 e0       	ldi	r25, 0x00	; 0
+ 2ac:	21 e0       	ldi	r18, 0x01	; 1
+ 2ae:	30 e0       	ldi	r19, 0x00	; 0
+ 2b0:	01 2e       	mov	r0, r17
+ 2b2:	02 c0       	rjmp	.+4      	; 0x2b8 <main+0xae>
+ 2b4:	22 0f       	add	r18, r18
+ 2b6:	33 1f       	adc	r19, r19
+ 2b8:	0a 94       	dec	r0
+ 2ba:	e2 f7       	brpl	.-8      	; 0x2b4 <main+0xaa>
+ 2bc:	02 2b       	or	r16, r18
+				if(score_note[NoteNumber]>=64) {	// 楽譜終了処理
+ 2be:	f7 01       	movw	r30, r14
+ 2c0:	ea 52       	subi	r30, 0x2A	; 42
+ 2c2:	fc 47       	sbci	r31, 0x7C	; 124
+ 2c4:	20 81       	ld	r18, Z
+ 2c6:	20 34       	cpi	r18, 0x40	; 64
+ 2c8:	40 f0       	brcs	.+16     	; 0x2da <main+0xd0>
+					NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+					NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+					tickCntr = 0;			// 発音タイミングカウンタ
+					NoteNumber = 0;			// ノート番号
+					initTeeth();
+ 2ca:	68 df       	rcall	.-304    	; 0x19c <initTeeth>
+				NoteOn |= 0x01 << NoteQueue;
+				if(score_note[NoteNumber]>=64) {	// 楽譜終了処理
+					NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+					NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+					tickCntr = 0;			// 発音タイミングカウンタ
+					NoteNumber = 0;			// ノート番号
+ 2cc:	e1 2c       	mov	r14, r1
+ 2ce:	f1 2c       	mov	r15, r1
+				// 発音情報の登録
+				NoteOn |= 0x01 << NoteQueue;
+				if(score_note[NoteNumber]>=64) {	// 楽譜終了処理
+					NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+					NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+					tickCntr = 0;			// 発音タイミングカウンタ
+ 2d0:	c1 2c       	mov	r12, r1
+ 2d2:	d1 2c       	mov	r13, r1
+			while(score_tick[NoteNumber]<=tickCntr) {
+				// 発音情報の登録
+				NoteOn |= 0x01 << NoteQueue;
+				if(score_note[NoteNumber]>=64) {	// 楽譜終了処理
+					NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+					NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+ 2d4:	00 e0       	ldi	r16, 0x00	; 0
+			NoteOn = 0;
+			while(score_tick[NoteNumber]<=tickCntr) {
+				// 発音情報の登録
+				NoteOn |= 0x01 << NoteQueue;
+				if(score_note[NoteNumber]>=64) {	// 楽譜終了処理
+					NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+ 2d6:	10 e0       	ldi	r17, 0x00	; 0
+					NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+					tickCntr = 0;			// 発音タイミングカウンタ
+					NoteNumber = 0;			// ノート番号
+					initTeeth();
+					break;
+ 2d8:	2b c0       	rjmp	.+86     	; 0x330 <main+0x126>
+				}
+				DesignatedNote[NoteQueue] = score_note[NoteNumber];
+ 2da:	e1 e0       	ldi	r30, 0x01	; 1
+ 2dc:	f0 e0       	ldi	r31, 0x00	; 0
+ 2de:	ec 0f       	add	r30, r28
+ 2e0:	fd 1f       	adc	r31, r29
+ 2e2:	e8 0f       	add	r30, r24
+ 2e4:	f9 1f       	adc	r31, r25
+ 2e6:	20 83       	st	Z, r18
+				envelope[NoteQueue] = 0;
+ 2e8:	88 0f       	add	r24, r24
+ 2ea:	99 1f       	adc	r25, r25
+ 2ec:	e1 e0       	ldi	r30, 0x01	; 1
+ 2ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f0:	ec 0f       	add	r30, r28
+ 2f2:	fd 1f       	adc	r31, r29
+ 2f4:	e8 0f       	add	r30, r24
+ 2f6:	f9 1f       	adc	r31, r25
+ 2f8:	10 86       	std	Z+8, r1	; 0x08
+ 2fa:	11 86       	std	Z+9, r1	; 0x09
+				// 次の音符へ
+				NoteNumber++;
+ 2fc:	bf ef       	ldi	r27, 0xFF	; 255
+ 2fe:	eb 1a       	sub	r14, r27
+ 300:	fb 0a       	sbc	r15, r27
+				if(NoteNumber>=maxNoteNumber) {	// 暫定終了処理へ
+ 302:	e3 e8       	ldi	r30, 0x83	; 131
+ 304:	ee 16       	cp	r14, r30
+ 306:	e1 e0       	ldi	r30, 0x01	; 1
+ 308:	fe 06       	cpc	r15, r30
+ 30a:	80 f4       	brcc	.+32     	; 0x32c <main+0x122>
+					estimatedEndFlag = 1;
+					break;
+				}
+				NoteQueue++;
+ 30c:	1f 5f       	subi	r17, 0xFF	; 255
+				if(NoteQueue>=MAX_NOTE) {
+ 30e:	18 30       	cpi	r17, 0x08	; 8
+ 310:	08 f0       	brcs	.+2      	; 0x314 <main+0x10a>
+					NoteQueue = 0;
+ 312:	10 e0       	ldi	r17, 0x00	; 0
+			#endif
+		
+			// 楽譜のtickとnoteをチェックして発音情報を登録
+			// 発音数がMAX_NOTEを超えた場合でも発音状態を無視して順番に再発音する
+			NoteOn = 0;
+			while(score_tick[NoteNumber]<=tickCntr) {
+ 314:	f7 01       	movw	r30, r14
+ 316:	ee 0f       	add	r30, r30
+ 318:	ff 1f       	adc	r31, r31
+ 31a:	e7 5a       	subi	r30, 0xA7	; 167
+ 31c:	fa 47       	sbci	r31, 0x7A	; 122
+ 31e:	80 81       	ld	r24, Z
+ 320:	91 81       	ldd	r25, Z+1	; 0x01
+ 322:	c8 16       	cp	r12, r24
+ 324:	d9 06       	cpc	r13, r25
+ 326:	08 f0       	brcs	.+2      	; 0x32a <main+0x120>
+ 328:	bf cf       	rjmp	.-130    	; 0x2a8 <main+0x9e>
+ 32a:	02 c0       	rjmp	.+4      	; 0x330 <main+0x126>
+				DesignatedNote[NoteQueue] = score_note[NoteNumber];
+				envelope[NoteQueue] = 0;
+				// 次の音符へ
+				NoteNumber++;
+				if(NoteNumber>=maxNoteNumber) {	// 暫定終了処理へ
+					estimatedEndFlag = 1;
+ 32c:	bb 24       	eor	r11, r11
+ 32e:	b3 94       	inc	r11
+			Serial_print(" : ");
+			Serial_rprintln_int(NoteOn, 16);
+			#endif
+			
+			// 各ノートのエンベロープを更新
+			for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 330:	a1 2c       	mov	r10, r1
+ 332:	33 c0       	rjmp	.+102    	; 0x39a <main+0x190>
+				if(teeth[i].EnvDat!=0 && !(NoteOn & NoteOn_bm[i])) {	// NoteOnトリガー時は更新しない
+ 334:	8a 2d       	mov	r24, r10
+ 336:	90 e0       	ldi	r25, 0x00	; 0
+ 338:	fc 01       	movw	r30, r24
+ 33a:	ee 0f       	add	r30, r30
+ 33c:	ff 1f       	adc	r31, r31
+ 33e:	ee 0f       	add	r30, r30
+ 340:	ff 1f       	adc	r31, r31
+ 342:	e8 0f       	add	r30, r24
+ 344:	f9 1f       	adc	r31, r25
+ 346:	ee 5f       	subi	r30, 0xFE	; 254
+ 348:	f0 4c       	sbci	r31, 0xC0	; 192
+ 34a:	24 81       	ldd	r18, Z+4	; 0x04
+ 34c:	22 23       	and	r18, r18
+ 34e:	21 f1       	breq	.+72     	; 0x398 <main+0x18e>
+ 350:	fc 01       	movw	r30, r24
+ 352:	e2 53       	subi	r30, 0x32	; 50
+ 354:	fc 47       	sbci	r31, 0x7C	; 124
+ 356:	20 81       	ld	r18, Z
+ 358:	20 23       	and	r18, r16
+ 35a:	f1 f4       	brne	.+60     	; 0x398 <main+0x18e>
+					// エンベロープの更新
+					uint8_t EnvIdx = calEnvelope(teeth[i].Pitch, &envelope[i]);
+ 35c:	bc 01       	movw	r22, r24
+ 35e:	66 0f       	add	r22, r22
+ 360:	77 1f       	adc	r23, r23
+ 362:	29 e0       	ldi	r18, 0x09	; 9
+ 364:	30 e0       	ldi	r19, 0x00	; 0
+ 366:	2c 0f       	add	r18, r28
+ 368:	3d 1f       	adc	r19, r29
+ 36a:	62 0f       	add	r22, r18
+ 36c:	73 1f       	adc	r23, r19
+ 36e:	4c 01       	movw	r8, r24
+ 370:	88 0c       	add	r8, r8
+ 372:	99 1c       	adc	r9, r9
+ 374:	88 0c       	add	r8, r8
+ 376:	99 1c       	adc	r9, r9
+ 378:	88 0d       	add	r24, r8
+ 37a:	99 1d       	adc	r25, r9
+ 37c:	dc 01       	movw	r26, r24
+ 37e:	ae 5f       	subi	r26, 0xFE	; 254
+ 380:	b0 4c       	sbci	r27, 0xC0	; 192
+ 382:	4d 01       	movw	r8, r26
+ 384:	8d 91       	ld	r24, X+
+ 386:	9c 91       	ld	r25, X
+ 388:	1f df       	rcall	.-450    	; 0x1c8 <calEnvelope>
+					teeth[i].EnvDat = Envelope[EnvIdx];
+ 38a:	e8 2f       	mov	r30, r24
+ 38c:	f0 e0       	ldi	r31, 0x00	; 0
+ 38e:	e1 5a       	subi	r30, 0xA1	; 161
+ 390:	f7 47       	sbci	r31, 0x77	; 119
+ 392:	80 81       	ld	r24, Z
+ 394:	f4 01       	movw	r30, r8
+ 396:	84 83       	std	Z+4, r24	; 0x04
+			Serial_print(" : ");
+			Serial_rprintln_int(NoteOn, 16);
+			#endif
+			
+			// 各ノートのエンベロープを更新
+			for(uint8_t i = 0; i<MAX_NOTE; i++) {
+ 398:	a3 94       	inc	r10
+ 39a:	f7 e0       	ldi	r31, 0x07	; 7
+ 39c:	fa 15       	cp	r31, r10
+ 39e:	50 f6       	brcc	.-108    	; 0x334 <main+0x12a>
+					teeth[i].EnvDat = Envelope[EnvIdx];
+				}
+			}
+			
+			// TICカウンタの更新
+			tickCntr++;
+ 3a0:	2f ef       	ldi	r18, 0xFF	; 255
+ 3a2:	c2 1a       	sub	r12, r18
+ 3a4:	d2 0a       	sbc	r13, r18
+			
+			// 暫定終了処理
+			if(estimatedEndFlag && (tickCntr>=estimatedEndTicks)) {
+ 3a6:	bb 20       	and	r11, r11
+ 3a8:	09 f4       	brne	.+2      	; 0x3ac <main+0x1a2>
+ 3aa:	4b cf       	rjmp	.-362    	; 0x242 <main+0x38>
+ 3ac:	34 ef       	ldi	r19, 0xF4	; 244
+ 3ae:	c3 16       	cp	r12, r19
+ 3b0:	32 e4       	ldi	r19, 0x42	; 66
+ 3b2:	d3 06       	cpc	r13, r19
+ 3b4:	08 f4       	brcc	.+2      	; 0x3b8 <main+0x1ae>
+ 3b6:	45 cf       	rjmp	.-374    	; 0x242 <main+0x38>
+				estimatedEndFlag = 0;
+				NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+				NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+				tickCntr = 0;			// 発音タイミングカウンタ
+				NoteNumber = 0;			// ノート番号
+				initTeeth();
+ 3b8:	f1 de       	rcall	.-542    	; 0x19c <initTeeth>
+			// TICカウンタの更新
+			tickCntr++;
+			
+			// 暫定終了処理
+			if(estimatedEndFlag && (tickCntr>=estimatedEndTicks)) {
+				estimatedEndFlag = 0;
+ 3ba:	b1 2c       	mov	r11, r1
+				NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+				NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+				tickCntr = 0;			// 発音タイミングカウンタ
+				NoteNumber = 0;			// ノート番号
+ 3bc:	e1 2c       	mov	r14, r1
+ 3be:	f1 2c       	mov	r15, r1
+			// 暫定終了処理
+			if(estimatedEndFlag && (tickCntr>=estimatedEndTicks)) {
+				estimatedEndFlag = 0;
+				NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+				NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+				tickCntr = 0;			// 発音タイミングカウンタ
+ 3c0:	c1 2c       	mov	r12, r1
+ 3c2:	d1 2c       	mov	r13, r1
+			
+			// 暫定終了処理
+			if(estimatedEndFlag && (tickCntr>=estimatedEndTicks)) {
+				estimatedEndFlag = 0;
+				NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+				NoteOn = 0;				// 発音指示 Bit Map [MAX_NODE -1 : 0]
+ 3c4:	00 e0       	ldi	r16, 0x00	; 0
+			tickCntr++;
+			
+			// 暫定終了処理
+			if(estimatedEndFlag && (tickCntr>=estimatedEndTicks)) {
+				estimatedEndFlag = 0;
+				NoteQueue = 0;			// 発音状態カウンタ mod MAX_NOTE
+ 3c6:	10 e0       	ldi	r17, 0x00	; 0
+ 3c8:	3c cf       	rjmp	.-392    	; 0x242 <main+0x38>
+
+000003ca <_exit>:
+ 3ca:	f8 94       	cli
+
+000003cc <__stop_program>:
+ 3cc:	ff cf       	rjmp	.-2      	; 0x3cc <__stop_program>
